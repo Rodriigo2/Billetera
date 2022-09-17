@@ -5,12 +5,12 @@ $monto = $_GET['monto'];
 
 include "conexion/conexion.php";
 
-$sql = "SELECT * FROM dinero_actual";
+$sql = "SELECT dinero FROM dinero_actual";
 $res = mysqli_query($con,$sql);
 
-$dato = mysqli_num_rows($res);
+$pagar = mysqli_fetch_array($res);
 
-if($dato<$monto){
+if($monto>$pagar['dinero']){
     echo '<script>alert("Imposible pagar la cuenta porque el saldo disponible es menor al monto de la cuenta");history.go(-1)</script>';
     exit;
 }else{
